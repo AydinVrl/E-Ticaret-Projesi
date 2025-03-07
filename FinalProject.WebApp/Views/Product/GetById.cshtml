@@ -1,0 +1,36 @@
+﻿@model ProductCreateDTO
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="text-center">
+            <img class="img-fluid shadow rounded-3 my-3" src="~/images/@Model.ImageUrl" />
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="text-start">
+            <h3 class="my-1 display-4">@Model.Name</h3>
+            <p class="lead text-danger">
+                <b>Price: </b>@Model.Price.ToString("C2")
+            </p>
+            <form id="@Model.Id" asp-page="/Error2" method="post">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn btn-outline-success">
+                    <i class="fa fa-cart-plus"></i> Add Basket
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row border-top py-3 my-3">
+    <div class="col-md-12">
+        <h4 class="my-1 display-6">Summary</h4>
+        <div class="px-3 my-3">
+            @Html.Raw(Model.Summary)
+        </div>
+    </div>
+</div>
+
+

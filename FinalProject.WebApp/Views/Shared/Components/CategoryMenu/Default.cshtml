@@ -1,0 +1,9 @@
+﻿@model IEnumerable<CategoryWithCountDTO>
+
+<div class="list-group">
+    <a asp-action="" class="list-group-item list-group-item-action fw-bolder">All Products - <span class="text-success">@await Component.InvokeAsync("ProductCount")</span></a>
+    @foreach (var item in Model)
+    {
+        <a asp-route-CatId="@item.Id" class="list-group-item list-group-item-action">@item.Name - <span class="text-success">@item.ProductCount</span></a>
+    }
+</div>

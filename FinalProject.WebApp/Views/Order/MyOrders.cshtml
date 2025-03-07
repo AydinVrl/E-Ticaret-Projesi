@@ -1,0 +1,54 @@
+﻿@model IEnumerable<FinalProject.Entities.Models.Order>
+
+@{
+    ViewData["Title"] = "MyOrders";
+}
+
+<h1>MyOrders</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Siparis No
+            </th>
+            <th>
+                Siparis Adı
+            </th>
+            <th>
+                Sehir
+            </th>
+            <th>
+                Durumu
+            </th>
+            <th>
+                Tarihi
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @(item.Shipped?"Kargolandı":"Hazırlanıyor")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Detail", "Complete", new { OrderId = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

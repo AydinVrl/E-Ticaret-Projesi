@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ProductDTO>
+
+@{
+    ViewData["Title"] = "All Products";
+}
+
+<h2>Products </h2>
+<hr />
+<div class="row">
+    <div class="col-md-3">
+        <h3>Kategoriler</h3>
+        <hr />
+        @await Component.InvokeAsync("CategoryMenu")
+        
+        <div class="my-3">
+            <h4>Fiyat Filitresi</h4>
+            <form asp-action="" method="get">
+                <div>
+                    <input name="MinPrice" class="form-text" placeholder="Minimum Fiyat" />
+                </div>
+                <div>
+                    <input name="MaxPrice" class="form-text" placeholder="Maksimum Fiyat" />
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-success">Uygula</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            @if (Model is not null && Model.Count() > 0)
+            {
+                @foreach (var item in Model)
+                {
+                    @await Html.PartialAsync("_ProductCard",item)
+                }
+            }
+            else
+            {
+                <div class="alert alert-warning" role="alert">
+                    Bu kategoride sizlere gösterebileceğimiz bir ürün bulunmamaktadır.
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+

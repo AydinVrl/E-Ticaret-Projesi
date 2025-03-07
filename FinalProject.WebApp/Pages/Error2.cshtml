@@ -1,0 +1,69 @@
+﻿@page
+@{
+    Layout = "_Layout";
+}
+@model FinalProject.WebApp.Pages.ErrorModel2
+@{
+}
+
+<div>
+    <div class="text-center display-6">
+        My Basket
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Product
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    SubTotal
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.Cart?.Lines)
+            {
+                <tr>
+                    <td>
+                        @line.Product.Name
+                    </td>
+                    <td>
+                        @line.Quantity
+                    </td>
+                    <td>
+                        @((line.Product.Price * line.Quantity).ToString("C2"))
+                    </td>
+                    <td>
+                        <form method="post" asp-page-handler="Remove">
+                            <input type="hidden" name="id" value="@line.Product.Id" />
+                            <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">
+                    Total :
+                </td>
+                <td>
+                    @Model.Cart?.TotalPrice().ToString("C2")
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="text-center my-3">
+        <a class="btn btn-primary" asp-action="Checkout" asp-controller="Order">
+            Checkout
+        </a>
+    </div>
+</div>
+
